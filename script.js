@@ -51,7 +51,12 @@ function moverBaixo(){
     acaoAtual = () => posicao.y += 50
 }
 
-
+function gameOver(){
+    if(posicao.x >= 850 || posicao.x < 0 || posicao.y >= 850 || posicao.y < 0){
+        alert("Game Over");
+    }
+    
+}
 
 const handleKeys = {
     KeyS() {
@@ -76,6 +81,7 @@ document.addEventListener('keydown', ({code}) => {
                 checkers()
                 acaoAtual()
                 snake()
+                gameOver()
             }, 500)
         }
     }
