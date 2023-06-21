@@ -1,7 +1,15 @@
+let posicao = {
+    x : 200,
+    y : 400
+}
+let acaoAtual
+let start
+
 function square(color, x, y){
     const canvas = document.getElementById('mapa');
     const ctx = canvas.getContext('2d');
 
+    ctx.globalCompositeOperation='source-over';
     ctx.fillStyle = color
     ctx.fillRect(x, y, 50, 50);
 }
@@ -19,4 +27,59 @@ function checkers(){
     }
     
 }
-checkers();
+function snake(){
+    const canvas = document.getElementById('mapa');
+    const ctx = canvas.getContext('2d');
+
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle = "black";
+    ctx.fillRect(posicao.x, posicao.y, 50, 50);
+}
+    
+
+
+function moverDireita(){
+    acaoAtual = () => posicao.x += 50
+}
+function moverEsquerda(){
+    acaoAtual = () => posicao.x -= 50
+}
+function moverCima(){
+    acaoAtual = () => posicao.y -= 50
+}
+function moverBaixo(){
+    acaoAtual = () => posicao.y += 50
+}
+
+
+
+const handleKeys = {
+    KeyS() {
+        moverBaixo();
+    },
+    KeyW() {
+        moverCima();
+    },
+    KeyD() {
+        moverDireita();
+    },
+    KeyA() {
+        moverEsquerda();
+    }
+}
+
+document.addEventListener('keydown', ({code}) => {
+    if (handleKeys[code]) {
+        handleKeys[code]()
+        if(!start){
+            start = setInterval(()=>{
+                checkers()
+                acaoAtual()
+                snake()
+            }, 500)
+        }
+    }
+})
+
+checkers()
+snake()
