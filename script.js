@@ -31,7 +31,6 @@ function snake(){
     const canvas = document.getElementById('mapa');
     const ctx = canvas.getContext('2d');
 
-    ctx.globalCompositeOperation='source-over';
     ctx.fillStyle = "black";
     ctx.fillRect(posicao.x, posicao.y, 50, 50);
 }
@@ -55,7 +54,14 @@ function gameOver(){
     if(posicao.x >= 850 || posicao.x < 0 || posicao.y >= 850 || posicao.y < 0){
         alert("Game Over");
     }
-    
+}
+function createApple(){
+    const canvas = document.getElementById('mapa');
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = "#f54266";
+    ctx.arc(125, 125, 25, 0, 2 * Math.PI)
+    ctx.fill();
 }
 
 const handleKeys = {
@@ -89,3 +95,4 @@ document.addEventListener('keydown', ({code}) => {
 
 checkers()
 snake()
+//createApple()
