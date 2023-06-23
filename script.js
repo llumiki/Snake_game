@@ -1,9 +1,13 @@
 const canvas = document.getElementById('mapa');
 const ctx = canvas.getContext('2d');
 
-let posicao = {
+const posicao = {
     x : 200,
     y : 400
+}
+const maca = {
+    x: Math.floor(Math.random() * 17) * 50,
+    y: Math.floor(Math.random() * 17) * 50
 }
 let acaoAtual
 let start
@@ -60,11 +64,15 @@ function createApple(x, y){
     ctx.closePath()
 }
 function genApple(){
-    const xRandom = Math.floor(Math.random() * 17) * 50
-    const yRandom = Math.floor(Math.random() * 17) * 50
-    createApple(xRandom, yRandom)
+    maca.x = Math.floor(Math.random() * 17) * 50
+    maca.y = Math.floor(Math.random() * 17) * 50
 }
 
+function comeu(){
+    if(maca.x == posicao.x && maca.y == posicao.y){
+        genApple()
+    }
+}
 const handleKeys = {
     KeyS() {
         moverBaixo();
@@ -86,8 +94,9 @@ document.addEventListener('keydown', ({code}) => {
         if(!start){
             start = setInterval(()=>{
                 checkers()
-                genApple()
+                comeu()
                 acaoAtual()
+                createApple(maca.x, maca.y)
                 snake()
                 gameOver()
             }, 200)
