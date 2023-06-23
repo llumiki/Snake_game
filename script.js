@@ -1,3 +1,6 @@
+const canvas = document.getElementById('mapa');
+const ctx = canvas.getContext('2d');
+
 let posicao = {
     x : 200,
     y : 400
@@ -6,12 +9,9 @@ let acaoAtual
 let start
 
 function square(color, x, y){
-    const canvas = document.getElementById('mapa');
-    const ctx = canvas.getContext('2d');
-
-    ctx.globalCompositeOperation='source-over';
     ctx.fillStyle = color
     ctx.fillRect(x, y, 50, 50);
+    
 }
 function checkers(){
     let x = 0;
@@ -28,9 +28,6 @@ function checkers(){
     
 }
 function snake(){
-    const canvas = document.getElementById('mapa');
-    const ctx = canvas.getContext('2d');
-
     ctx.fillStyle = "black";
     ctx.fillRect(posicao.x, posicao.y, 50, 50);
 }
@@ -55,13 +52,17 @@ function gameOver(){
         alert("Game Over");
     }
 }
-function createApple(){
-    const canvas = document.getElementById('mapa');
-    const ctx = canvas.getContext('2d');
-
+function createApple(x, y){
+    ctx.beginPath()
     ctx.fillStyle = "#f54266";
-    ctx.arc(125, 125, 25, 0, 2 * Math.PI)
+    ctx.arc(x+25, y+25, 25, 0, 2 * Math.PI)
     ctx.fill();
+    ctx.closePath()
+}
+function genApple(){
+    const xRandom = Math.floor(Math.random() * 17) * 50
+    const yRandom = Math.floor(Math.random() * 17) * 50
+    createApple(xRandom, yRandom)
 }
 
 const handleKeys = {
@@ -85,14 +86,14 @@ document.addEventListener('keydown', ({code}) => {
         if(!start){
             start = setInterval(()=>{
                 checkers()
+                genApple()
                 acaoAtual()
                 snake()
                 gameOver()
-            }, 500)
+            }, 200)
         }
     }
 })
 
 checkers()
 snake()
-//createApple()
