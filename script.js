@@ -18,14 +18,15 @@ const posicao = [
 
 
 const maca = {
-    x: Math.floor(Math.random() * 17) * 50,
-    y: Math.floor(Math.random() * 17) * 50
+    x: Math.floor(Math.random() * 15) * 50,
+    y: Math.floor(Math.random() * 15) * 50
 }
 
 let acaoAtual
 let perdeu = false
 let start
 let direcao
+let pontos = 0
 
 function square(color, x, y){
     ctx.fillStyle = color
@@ -34,8 +35,8 @@ function square(color, x, y){
 }
 function checkers(){
     let x = 0;
-    for(j = 0; j < 850; j+= 50){
-        for(i = 0; i < 850; i+= 50){
+    for(j = 0; j < 750; j+= 50){
+        for(i = 0; i < 750; i+= 50){
             if(x % 2 == 0){
                 square("#8de0be", j , i);
             }else{
@@ -47,8 +48,10 @@ function checkers(){
     
 }
 function snake(){
+    ctx.fillStyle = "rgb(100, 130, 200)";
+    ctx.fillRect(posicao[0].x, posicao[0].y, 50, 50);
     ctx.fillStyle = "rgb(80, 110, 180)";
-    for(i = 0; i < posicao.length; i++){
+    for(i = 1; i < posicao.length; i++){
         ctx.fillRect(posicao[i].x, posicao[i].y, 50, 50);
     }
 }
@@ -85,7 +88,7 @@ function gameOver(){
     }
 }
 function bateuParede(){
-    if(posicao[0].x >= 850 || posicao[0].x < 0 || posicao[0].y >= 850 || posicao[0].y < 0){
+    if(posicao[0].x >= 750 || posicao[0].x < 0 || posicao[0].y >= 750 || posicao[0].y < 0){
         perdeu = true;
     }
 }
@@ -104,17 +107,19 @@ function createApple(x, y){
     ctx.closePath()
 }
 function genApple(){
-    maca.x = Math.floor(Math.random() * 17) * 50
-    maca.y = Math.floor(Math.random() * 17) * 50
+    maca.x = Math.floor(Math.random() * 15) * 50
+    maca.y = Math.floor(Math.random() * 15) * 50
 }
 
 function comeu(){
     if(maca.x == posicao[0].x && maca.y == posicao[0].y){
         genApple()
         posicao.push({
-            x:(posicao[posicao.length-1].x) - 50,
-            y:(posicao[posicao.length-1].y) - 50,
+            x:(posicao[posicao.length-1].x),
+            y:(posicao[posicao.length-1].y)
         })
+        pontos++
+        document.getElementById("pontuacao").innerHTML = pontos
     }
 }
 const handleKeys = {
@@ -136,6 +141,8 @@ const handleKeys = {
     }
 }
 
+document.getElementById("pontuacao").innerHTML = pontos
+
 document.addEventListener('keydown', ({code}) => {
     if (handleKeys[code]) {
         handleKeys[code]()
@@ -148,7 +155,7 @@ document.addEventListener('keydown', ({code}) => {
                 createApple(maca.x, maca.y)
                 snake()
                 gameOver()
-            }, 200)
+            }, 100)
         }
     }
 })
