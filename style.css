@@ -4,9 +4,13 @@
 }
 html, body{
     height: 100%;
+    background-color: rgb(55, 54, 70);
 }
 body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#mapa{
+    border: rgb(67, 161, 149) 25px solid
 }

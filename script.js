@@ -39,7 +39,7 @@ function checkers(){
             if(x % 2 == 0){
                 square("#8de0be", j , i);
             }else{
-                square("#4bc9b9", j , i);
+                square("#57d4bb", j , i);
             }
             x++
         }
@@ -47,7 +47,7 @@ function checkers(){
     
 }
 function snake(){
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "rgb(80, 110, 180)";
     for(i = 0; i < posicao.length; i++){
         ctx.fillRect(posicao[i].x, posicao[i].y, 50, 50);
     }
@@ -131,7 +131,7 @@ const handleKeys = {
         moverDireita();
     },
     KeyA() {
-        if(direcao != "direita")
+        if(direcao != "esquerda")
         moverEsquerda();
     }
 }
