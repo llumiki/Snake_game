@@ -13,19 +13,19 @@ const posicao = [
     {
         x : 100,
         y : 400
-    },
-    {
-        x : 50,
-        y : 400
     }
 ]
+
+
 const maca = {
     x: Math.floor(Math.random() * 17) * 50,
     y: Math.floor(Math.random() * 17) * 50
 }
+
 let acaoAtual
 let perdeu = false
 let start
+let direcao
 
 function square(color, x, y){
     ctx.fillStyle = color
@@ -62,15 +62,19 @@ function reorganizar(){
 
 function moverDireita(){
     acaoAtual = () => posicao[0].x += 50
+    direcao = "direita"
 }
 function moverEsquerda(){
     acaoAtual = () => posicao[0].x -= 50
+    direcao = "esquerda"
 }
 function moverCima(){
     acaoAtual = () => posicao[0].y -= 50
+    direcao = "cima"
 }
 function moverBaixo(){
     acaoAtual = () => posicao[0].y += 50
+    direcao = "baixo"
 }
 
 function gameOver(){
@@ -115,15 +119,19 @@ function comeu(){
 }
 const handleKeys = {
     KeyS() {
+        if(direcao != "cima")
         moverBaixo();
     },
     KeyW() {
+        if(direcao != "baixo")
         moverCima();
     },
     KeyD() {
+        if(direcao != "esquerda")
         moverDireita();
     },
     KeyA() {
+        if(direcao != "direita")
         moverEsquerda();
     }
 }
