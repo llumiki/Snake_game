@@ -1,10 +1,24 @@
 const canvas = document.getElementById('mapa');
 const ctx = canvas.getContext('2d');
 
-const posicao = {
-    x : 200,
-    y : 400
-}
+const posicao = [
+    {
+        x : 200,
+        y : 400
+    },
+    {
+        x : 150,
+        y : 400
+    },
+    {
+        x : 100,
+        y : 400
+    },
+    {
+        x : 50,
+        y : 400
+    }
+]
 const maca = {
     x: Math.floor(Math.random() * 17) * 50,
     y: Math.floor(Math.random() * 17) * 50
@@ -33,26 +47,33 @@ function checkers(){
 }
 function snake(){
     ctx.fillStyle = "black";
-    ctx.fillRect(posicao.x, posicao.y, 50, 50);
+    for(i = 0; i < posicao.length; i++){
+        ctx.fillRect(posicao[i].x, posicao[i].y, 50, 50);
+    }
 }
-    
+function reorganizar(){
+    for(i = posicao.length-1; i > 0; i--){
+        posicao[i].x = posicao[i-1].x
+        posicao[i].y = posicao[i-1].y
+    }
+}
 
 
 function moverDireita(){
-    acaoAtual = () => posicao.x += 50
+    acaoAtual = () => posicao[0].x += 50
 }
 function moverEsquerda(){
-    acaoAtual = () => posicao.x -= 50
+    acaoAtual = () => posicao[0].x -= 50
 }
 function moverCima(){
-    acaoAtual = () => posicao.y -= 50
+    acaoAtual = () => posicao[0].y -= 50
 }
 function moverBaixo(){
-    acaoAtual = () => posicao.y += 50
+    acaoAtual = () => posicao[0].y += 50
 }
 
 function gameOver(){
-    if(posicao.x >= 850 || posicao.x < 0 || posicao.y >= 850 || posicao.y < 0){
+    if(posicao[0].x >= 850 || posicao[0].x < 0 || posicao[0].y >= 850 || posicao[0].y < 0){
         alert("Game Over");
     }
 }
@@ -69,8 +90,12 @@ function genApple(){
 }
 
 function comeu(){
-    if(maca.x == posicao.x && maca.y == posicao.y){
+    if(maca.x == posicao[0].x && maca.y == posicao[0].y){
         genApple()
+        posicao.push({
+            x:(posicao[posicao.length-1].x) - 50,
+            y:(posicao[posicao.length-1].y) - 50,
+        })
     }
 }
 const handleKeys = {
@@ -95,6 +120,7 @@ document.addEventListener('keydown', ({code}) => {
             start = setInterval(()=>{
                 checkers()
                 comeu()
+                reorganizar()
                 acaoAtual()
                 createApple(maca.x, maca.y)
                 snake()
