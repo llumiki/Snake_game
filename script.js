@@ -38,9 +38,9 @@ function checkers(){
     for(j = 0; j < 750; j+= 50){
         for(i = 0; i < 750; i+= 50){
             if(x % 2 == 0){
-                square("#8de0be", j , i);
+                square("#d5cedb", j , i);
             }else{
-                square("#57d4bb", j , i);
+                square("#c1b6cc", j , i);
             }
             x++
         }
@@ -49,10 +49,10 @@ function checkers(){
 }
 function snake(){
     ctx.fillStyle = "rgb(100, 130, 200)";
-    ctx.fillRect(posicao[0].x, posicao[0].y, 50, 50);
+    ctx.fillRect(posicao[0].x + 5, posicao[0].y + 5, 40, 40);
     ctx.fillStyle = "rgb(80, 110, 180)";
     for(i = 1; i < posicao.length; i++){
-        ctx.fillRect(posicao[i].x, posicao[i].y, 50, 50);
+        ctx.fillRect(posicao[i].x + 5, posicao[i].y + 5, 40, 40);
     }
 }
 function reorganizar(){
@@ -101,9 +101,8 @@ function seBateu(){
 }
 function createApple(x, y){
     ctx.beginPath()
-    ctx.fillStyle = "#f54266";
-    ctx.arc(x+25, y+25, 25, 0, 2 * Math.PI)
-    ctx.fill();
+    ctx.fillStyle = "#c96189";
+    ctx.fillRect(x + 5, y + 5, 40, 40);
     ctx.closePath()
 }
 function genApple(){
@@ -136,7 +135,7 @@ const handleKeys = {
         moverDireita();
     },
     KeyA() {
-        if(direcao != "esquerda")
+        if(direcao != "direita")
         moverEsquerda();
     }
 }
