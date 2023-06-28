@@ -24,6 +24,7 @@ const maca = {
     y: Math.floor(Math.random() * 17) * 50
 }
 let acaoAtual
+let perdeu = false
 let start
 
 function square(color, x, y){
@@ -73,8 +74,22 @@ function moverBaixo(){
 }
 
 function gameOver(){
+    bateuParede()
+    seBateu()
+    if(perdeu){
+        alert("Game Over")
+    }
+}
+function bateuParede(){
     if(posicao[0].x >= 850 || posicao[0].x < 0 || posicao[0].y >= 850 || posicao[0].y < 0){
-        alert("Game Over");
+        perdeu = true;
+    }
+}
+function seBateu(){
+    for(i = 1; i < posicao.length; i++){
+        if(posicao[0].x == posicao[i].x && posicao[0].y == posicao[i].y){
+            perdeu = true;
+        }
     }
 }
 function createApple(x, y){
