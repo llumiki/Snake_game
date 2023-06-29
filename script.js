@@ -137,12 +137,32 @@ const handleKeys = {
     KeyA() {
         if(direcao != "direita")
         moverEsquerda();
+    },
+
+
+    
+    ArrowDown() {
+        if(direcao != "cima")
+        moverBaixo();
+    },
+    ArrowUp() {
+        if(direcao != "baixo")
+        moverCima();
+    },
+    ArrowRight() {
+        if(direcao != "esquerda")
+        moverDireita();
+    },
+    ArrowLeft() {
+        if(direcao != "direita")
+        moverEsquerda();
     }
 }
 
 document.getElementById("pontuacao").innerHTML = pontos
 
 document.addEventListener('keydown', ({code}) => {
+    console.log([code]);
     if (handleKeys[code]) {
         handleKeys[code]()
         if(!start){
