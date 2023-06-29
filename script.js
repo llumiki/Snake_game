@@ -65,19 +65,19 @@ function reorganizar(){
 
 function moverDireita(){
     acaoAtual = () => posicao[0].x += 50
-    direcao = "direita"
+    direcaoD = "direita"
 }
 function moverEsquerda(){
     acaoAtual = () => posicao[0].x -= 50
-    direcao = "esquerda"
+    direcaoD = "esquerda"
 }
 function moverCima(){
     acaoAtual = () => posicao[0].y -= 50
-    direcao = "cima"
+    direcaoD = "cima"
 }
 function moverBaixo(){
     acaoAtual = () => posicao[0].y += 50
-    direcao = "baixo"
+    direcaoD = "baixo"
 }
 
 function gameOver(){
@@ -108,6 +108,13 @@ function createApple(x, y){
 function genApple(){
     maca.x = Math.floor(Math.random() * 15) * 50
     maca.y = Math.floor(Math.random() * 15) * 50
+    for(i = 0; i < posicao.length; i++){
+        while(maca.x == posicao[i].x && maca.y == posicao[i].y){
+            maca.x = Math.floor(Math.random() * 15) * 50
+            maca.y = Math.floor(Math.random() * 15) * 50
+        }
+    }
+    
 }
 
 function comeu(){
@@ -171,6 +178,7 @@ document.addEventListener('keydown', ({code}) => {
                 comeu()
                 reorganizar()
                 acaoAtual()
+                direcao = direcaoD
                 createApple(maca.x, maca.y)
                 snake()
                 gameOver()
