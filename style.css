@@ -14,10 +14,23 @@ body{
 
 }
 #mapa{
-    border: #8a7d99 25px solid
+    border: #8a7d99 25px solid;
+    border-radius: 1vw;
 }
 #pontuacao{
     color: white;
     font-size: 5vw;
     font-family: 'DotGothic16', sans-serif;
+}
+.popup {
+    color: white;
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 100px;
+    
+    position: fixed;
+    background-color: rgb(55, 54, 70);
+    padding: 2vw;
+    border-radius: 1vw;
+    text-align: center;
+    z-index: 100;
 }

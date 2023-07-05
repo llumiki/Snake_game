@@ -1,7 +1,7 @@
 const canvas = document.getElementById('mapa');
 const ctx = canvas.getContext('2d');
 
-const posicao = [
+let posicao = [
     {
         x : 200,
         y : 400
@@ -51,9 +51,11 @@ function snake(){
     ctx.fillStyle = "rgb(100, 130, 200)";
     ctx.fillRect(posicao[0].x + 5, posicao[0].y + 5, 40, 40);
     ctx.fillStyle = "rgb(80, 110, 180)";
-    for(i = 1; i < posicao.length; i++){
+    for(i = 1; i < posicao.length-1; i++){
         ctx.fillRect(posicao[i].x + 5, posicao[i].y + 5, 40, 40);
     }
+    ctx.fillStyle = "rgb(70, 100, 170)";
+    ctx.fillRect(posicao[posicao.length-1].x + 5, posicao[posicao.length-1].y + 5, 40, 40);
 }
 function reorganizar(){
     for(i = posicao.length-1; i > 0; i--){
@@ -84,9 +86,37 @@ function gameOver(){
     bateuParede()
     seBateu()
     if(perdeu){
-        alert("Game Over")
+        clearInterval(start);
+        reiniciarJogo();
     }
 }
+function reiniciarJogo() {
+    perdeu = false;
+    pontos = 0;
+    posicao = [
+        {
+            x: 200,
+            y: 400
+        },
+        {
+            x: 150,
+            y: 400
+        },
+        {
+            x: 100,
+            y: 400
+        }
+    ];
+    start = null
+    direcao = null;
+    genApple();
+
+    document.getElementById('pontuacao').innerHTML = pontos;
+    checkers();
+    snake();
+}
+
+
 function bateuParede(){
     if(posicao[0].x >= 750 || posicao[0].x < 0 || posicao[0].y >= 750 || posicao[0].y < 0){
         perdeu = true;
