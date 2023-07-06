@@ -4,15 +4,15 @@ const ctx = canvas.getContext('2d');
 let posicao = [
     {
         x : 200,
-        y : 400
+        y : 350
     },
     {
         x : 150,
-        y : 400
+        y : 350
     },
     {
         x : 100,
-        y : 400
+        y : 350
     }
 ]
 
@@ -96,15 +96,15 @@ function reiniciarJogo() {
     posicao = [
         {
             x: 200,
-            y: 400
+            y: 350
         },
         {
             x: 150,
-            y: 400
+            y: 350
         },
         {
             x: 100,
-            y: 400
+            y: 350
         }
     ];
     start = null

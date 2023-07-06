@@ -28,9 +28,16 @@ body{
     font-size: 100px;
     
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(55, 54, 70);
     padding: 2vw;
     border-radius: 1vw;
-    text-align: center;
-    z-index: 100;
+}
+.bi{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
